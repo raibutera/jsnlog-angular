@@ -1,0 +1,26 @@
+{
+  "name": "jsnlog-angular",
+  "version": "0.0.0",
+  "homepage": "https://github.com/raibutera/jsnlog-angular",
+  "main": "jsnlog.js",
+  "description": "Angular.JS 1.x module for jsnlog, 'a tiny JavaScript logging library, [that's] simple and well documented.'",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals"
+  ],
+  "keywords": [
+    "angular", "console", "log", "logging", "error", "developer", "library", "jsnlog", "angularjs", "debug"
+  ],
+  "authors": [
+    "Rai Butera"
+  ],
+  "license": "Apache 2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
