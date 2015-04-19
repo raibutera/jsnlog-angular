@@ -44,8 +44,10 @@ function ngJSNlog () {
 
         // configure
         var defaultConfig = {
-
+            lol: 'lol'
         };
+
+        console.log(defaultConfig);
 
         /*jshint validthis: true */
         this.$get = [function(){
@@ -63,12 +65,22 @@ function ngJSNlog () {
     };
 
     function buildPrefix (input, options){
-        if(options && options.angular){
-            return prefixes.angular + '.' + input;
-        } else if (options && options.client) {
-            return prefixes.client + '.' + input;
+        if(input){
+            if(options && options.angular){
+                return prefixes.angular + '.' + input;
+            } else if (options && options.client) {
+                return prefixes.client + '.' + input;
+            } else {
+                return prefixes.base + '.' + input;
+            }
         } else {
-            return prefixes.base + '.' + input;
+            if(options && options.angular){
+                return prefixes.angular;
+            } else if (options && options.client) {
+                return prefixes.client;
+            } else {
+                return prefixes.base;
+            }
         }
     }
 
@@ -85,7 +97,7 @@ function ngJSNlog () {
     // overwrite vanilla Angular exception handler
     function exceptionHandlerReplacement(JL){
         return function (exception, cause) {
-            JL(prefixes.angular).fatalException(cause, exception);
+            JL(buildPrefix(null, {angular: true})).fatalException(cause, exception);
             throw exception;
         };
     }
