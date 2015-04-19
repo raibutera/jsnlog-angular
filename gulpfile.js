@@ -1,52 +1,56 @@
-// inject gulp
-var gulp = require('gulp');
+'use strict';
 
-// gulp plugin injection
-var runSequence = require('run-sequence');
-var gulpLoadPlugins = require('gulp-load-plugins');
-var plugins = gulpLoadPlugins();
+var path = require('path'),
+    gulp = require('gulp'),
+    webpack = require('gulp-webpack-build');
 
-// individual plugins from gulp-load-plugins
-var jshint = plugins.jshint;
-var uglify = plugins.uglify;
-var rename = plugins.rename;
-var concat = plugins.concat;
-var webpack = plugins.webpack;
-var sourcemaps = plugins.sourcemaps;
-var util = plugins.util;
-var log = util.log;
-var colors = util.colors;
+var src = './src',
+    dest = './dist',
+    webpackOptions = {
+        debug: true,
+        devtool: '#source-map',
+        watchDelay: 200
+    },
+    webpackConfig = {
+        useMemoryFs: true,
+        progress: true
+    },
+    CONFIG_FILENAME = webpack.config.CONFIG_FILENAME;
 
-/** GULP TASKS */
+gulp.task('webpack', [], function() {
+    console.error('webpack task:', '1:', path.join(src, '**', CONFIG_FILENAME), '2:', path.join(path.join(src, '**', CONFIG_FILENAME)));
 
-/**
- * default grunt task - transpiles
- */
-function defaultTask(){
+    return gulp.src(path.join(path.join(src, '**', CONFIG_FILENAME)), { base: path.resolve(src) })
+        .pipe(webpack.configure(webpackConfig))
+        .pipe(webpack.overrides(webpackOptions))
+        .pipe(webpack.compile())
+        .pipe(webpack.format({
+            version: false,
+            timings: true
+        }))
+        .pipe(webpack.failAfter({
+            errors: true,
+            warnings: true
+        }))
+        .pipe(gulp.dest(dest));
+});
 
-}
-gulp.task('default', defaultTask);
-
-/**
- * builds @ ./dist/jsnlog-angular.js and minified @ ./dist/jsnlog-angular.min.js
- */
-function distPrepare(){
-
-}
-gulp.task('distPrepare', distPrepare);
-
-/**
- * lints files
- */
-function lintFiles (){
-
-}
-gulp.task('jshint', lintFiles);
-
-/**
- * lints and builds
- */
-function distribute(){
-
-}
-gulp.task('dist', distribute);
+gulp.task('watch', function() {
+    gulp.watch(path.join(src, '**/*.*')).on('change', function(event) {
+        if (event.type === 'changed') {
+            gulp.src(event.path, { base: path.resolve(src) })
+                .pipe(webpack.closest(CONFIG_FILENAME))
+                .pipe(webpack.configure(webpackConfig))
+                .pipe(webpack.overrides(webpackOptions))
+                .pipe(webpack.watch(function(err, stats) {
+                    gulp.src(this.path, { base: this.base })
+                        .pipe(webpack.proxy(err, stats))
+                        .pipe(webpack.format({
+                            verbose: true,
+                            version: false
+                        }))
+                        .pipe(gulp.dest(dest));
+                }));
+        }
+    });
+});
