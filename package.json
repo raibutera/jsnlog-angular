@@ -2,7 +2,7 @@
   "name": "jsnlog-angular",
   "version": "0.0.0",
   "description": "angular library for jsnlog",
-  "main": "angular-jsnlog.min.js",
+  "main": "./dist/jsnlog-angular.min.js",
   "dependencies": {
     "gulp": "^3.8.11",
     "webpack": "^1.8.5"
