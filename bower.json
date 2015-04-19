@@ -1,6 +1,6 @@
 {
   "name": "jsnlog-angular",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "homepage": "https://github.com/raibutera/jsnlog-angular",
   "main": "./dist/jsnlog-angular.js",
   "description": "Angular.JS 1.x module for jsnlog, 'a tiny JavaScript logging library, [that's] simple and well documented.'",
@@ -10,7 +10,16 @@
     "globals"
   ],
   "keywords": [
-    "angular", "console", "log", "logging", "error", "developer", "library", "jsnlog", "angularjs", "debug"
+    "angular",
+    "console",
+    "log",
+    "logging",
+    "error",
+    "developer",
+    "library",
+    "jsnlog",
+    "angularjs",
+    "debug"
   ],
   "authors": [
     "Rai Butera"
