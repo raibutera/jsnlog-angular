@@ -18,6 +18,7 @@ module.exports = function(app) {
             throw new Error('JSNlog must be loaded!');
         }
 
+
         this.createAjaxAppender = JL.createAjaxAppender;
         this.createConsoleAppender = JL.createConsoleAppender;
         this.getAllLevel = JL.getAllLevel;
@@ -32,6 +33,10 @@ module.exports = function(app) {
 
         /*jshint validthis: true */
         this.$get = [function() {
+            var angularAppender = JL.createConsoleAppender('angularAppender');
+
+            JL().setOptions({appenders: [angularAppender]});
+
             return JL;
         }];
     }

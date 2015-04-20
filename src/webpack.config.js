@@ -3,7 +3,8 @@ var webpack = require("webpack");
 module.exports = {
     "entry": "./src/entry.js",
     "externals": {
-        "angular": "angular"
+        "angular": "angular",
+        "lodash": "lodash"
     },
     "output": {
         "library": "jsnlog-angular",

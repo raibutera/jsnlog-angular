@@ -23,6 +23,9 @@ var ngJSNlog = angular.module('ngJSNlog', []);
 // vanilla JL provider
 require('./jl-provider.js')(ngJSNlog);
 
+// a registry of loggers created using jsnlog-angular
+require('./logger-registry.js')(ngJSNlog);
+
 // ngJSNlog custom wrapper for JL
 require('./logger-provider.js')(ngJSNlog);
 
