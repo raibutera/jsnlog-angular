@@ -1,6 +1,6 @@
 {
   "name": "jsnlog-angular",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage": "https://github.com/raibutera/jsnlog-angular",
   "main": "./dist/jsnlog-angular.js",
   "description": "Angular.JS 1.x module for jsnlog, 'a tiny JavaScript logging library, [that's] simple and well documented.'",
