@@ -33,7 +33,7 @@ module.exports = function(app) {
 
         /*jshint validthis: true */
         this.$get = [function() {
-            var angularAppender = JL.createConsoleAppender('angularAppender');
+            var angularAppender = JL().createConsoleAppender('angularAppender');
 
             JL().setOptions({appenders: [angularAppender]});
 
