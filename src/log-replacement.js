@@ -1,8 +1,10 @@
 'use strict';
 
 module.exports = function(app) {
-    function logReplacement(logger) {
+    function logReplacement(Logger) {
         /*jshint validthis: true */
+
+        var logger = new Logger('$log',{app:false});
 
         this.log = function(msg) {
             logger().trace(msg);
