@@ -25,6 +25,7 @@ module.exports = function(app) {
                      */
                     function Logger(name, options) {
                         var isEnabled;
+                        var initialized;
 
                         var params = {
                             app: (options && options.app) ? options.app : true
@@ -39,10 +40,14 @@ module.exports = function(app) {
 
                         this.enable = function(){
                             isEnabled = true;
+                            initialized = true;
                             return LoggerRegistry.register(this.name, true);
                         };
 
                         if (isEnabled) {
+                            return JL(this.name);
+                        } else if (!initialized) {
+                            this.enable();
                             return JL(this.name);
                         } else {
                             return function() {
