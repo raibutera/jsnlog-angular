@@ -1,6 +1,20 @@
 'use strict';
 
-var _ = require('lodash');
+var _;
+try {
+  _ = require('lodash');
+} catch (e) {
+}
+
+if (!_) {
+  try {
+    _ = window._;
+  } catch (e) {
+  }
+}
+if (!_) {
+  throw new Error('lodash must be loaded!');
+}
 
 module.exports = function(app) {
     var dependencies = [];
