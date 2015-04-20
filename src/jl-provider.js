@@ -1,24 +1,23 @@
 'use strict';
 
+var JL;
+
+try {
+    JL = require("../lib/jsnlog.min.js");
+} catch (e) {}
+
+if (!JL) {
+    try {
+        JL = window.JL;
+    } catch (e) {}
+}
+if (!JL) {
+    throw new Error('JSNlog must be loaded!');
+}
+
 module.exports = function(app) {
     function ngJSNlogJLProvider() {
         /*jshint validthis: true */
-        var JL;
-
-        try {
-            JL = require("../lib/jsnlog.min.js");
-        } catch (e) {}
-
-        if (!JL) {
-            try {
-                JL = window.JL;
-            } catch (e) {}
-        }
-        if (!JL) {
-            throw new Error('JSNlog must be loaded!');
-        }
-
-
         this.createAjaxAppender = JL.createAjaxAppender;
         this.createConsoleAppender = JL.createConsoleAppender;
         this.getAllLevel = JL.getAllLevel;
